@@ -128,3 +128,10 @@ codegen: ## generate test code
 	uv run playwright codegen \
 		--target python-pytest \
 		--output tests/test_codegen.py
+
+.PHONY: locust
+locust: ## run locust server running on localhost:8089
+	uv run locust \
+		--locustfile scripts/locustfile.py \
+		--host http://localhost:8888 \
+		--web-port 8089
