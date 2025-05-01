@@ -16,6 +16,7 @@ info: ## show information
 install-deps-dev: ## install dependencies for development
 	uv sync --all-extras
 	uv run pre-commit install
+	uv run playwright install
 
 .PHONY: install-deps
 install-deps: ## install dependencies for production
