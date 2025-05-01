@@ -2,7 +2,6 @@ import logging
 import re
 
 from playwright.sync_api import Page, expect
-
 from workshop_playwright_python.core import hello_world
 
 
