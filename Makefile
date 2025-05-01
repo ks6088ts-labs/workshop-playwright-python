@@ -52,7 +52,7 @@ update: ## update packages
 # Docker
 # ---
 DOCKER_REPO_NAME ?= ks6088ts
-DOCKER_IMAGE_NAME ?= template-python
+DOCKER_IMAGE_NAME ?= workshop-playwright-python
 DOCKER_COMMAND ?=
 
 # Tools

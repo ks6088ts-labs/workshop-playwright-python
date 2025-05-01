@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
-site_name: template-python
+site_name: workshop-playwright-python
 site_url: ""
 repo_url: https://github.com/ks6088ts-labs/workshop-playwright-python
 repo_name: ks6088ts-labs/workshop-playwright-python
