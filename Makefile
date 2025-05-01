@@ -2,6 +2,9 @@
 GIT_REVISION ?= $(shell git rev-parse --short HEAD)
 GIT_TAG ?= $(shell git describe --tags --abbrev=0 --always | sed -e s/v//g)
 
+# Project
+SKIP_TEST ?= true
+
 .PHONY: help
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -40,7 +43,7 @@ lint: ## lint
 
 .PHONY: test
 test: ## run tests
-	uv run pytest --capture=no -vv
+	SKIP_TEST=$(SKIP_TEST) uv run pytest --capture=no -vv
 
 .PHONY: ci-test
 ci-test: install-deps-dev format-check lint test ## run CI tests

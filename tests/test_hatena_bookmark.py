@@ -1,8 +1,12 @@
 import json
 
+import pytest
+
 from playwright.sync_api import Page
+from tests import flags
 
 
+@pytest.mark.skipif(flags.SKIP, reason="This test is skipped because it requires a live server.")
 def test_hatena_bookmark(page: Page):
     page.goto("https://b.hatena.ne.jp/hotentry/all")
 

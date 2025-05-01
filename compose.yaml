@@ -1,0 +1,9 @@
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: very-strong-password
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
