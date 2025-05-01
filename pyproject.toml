@@ -4,7 +4,9 @@ version = "0.0.1"
 description = "A GitHub template repository for Python"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "pytest-playwright>=0.7.0",
+]
 
 [project.optional-dependencies]
 docs = [
