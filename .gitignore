@@ -164,3 +164,8 @@ cython_debug/
 requirements.txt
 generated
 tests/test_codegen.py
+.streamlit/*
+!.streamlit/config.yaml
+!.streamlit/secrets.toml.example
+playwright/.auth/*
+!playwright/.auth/.gitkeep
