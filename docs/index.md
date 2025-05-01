@@ -66,6 +66,10 @@ uv run scripts/load_context.py
 
 ## [Playwright MCP server](https://github.com/microsoft/playwright-mcp)
 
+## [Locust](https://github.com/locustio/locust)
+
+- [Your first test](https://docs.locust.io/en/stable/quickstart.html)
+
 ## Custom apps
 
 ### Credentials
