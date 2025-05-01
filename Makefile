@@ -126,4 +126,5 @@ show-trace: ## show trace
 .PHONY: codegen
 codegen: ## generate test code
 	uv run playwright codegen \
+		--target python-pytest \
 		--output tests/test_codegen.py
