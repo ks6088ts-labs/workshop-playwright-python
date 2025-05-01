@@ -16,6 +16,7 @@ info: ## show information
 install-deps-dev: ## install dependencies for development
 	uv sync --all-extras
 	uv run pre-commit install
+	uv run playwright install
 
 .PHONY: install-deps
 install-deps: ## install dependencies for production
@@ -98,3 +99,28 @@ docs-serve: ## serve documentation
 
 .PHONY: ci-test-docs
 ci-test-docs: docs ## run CI test for documentation
+
+# ---
+# Project
+# ---
+
+.PHONY: test-verbose
+test-verbose: ## run tests with verbose
+	uv run pytest \
+		--capture=no \
+		--verbose \
+		--headed \
+		--tracing on \
+		--video on \
+		--screenshot on \
+		--output generated
+
+TRACE_ZIP ?= generated/tests-test-core-py-test-get-started-link-chromium/trace.zip
+.PHONY: show-trace
+show-trace: ## show trace
+	uv run playwright show-trace $(TRACE_ZIP)
+
+.PHONY: codegen
+codegen: ## generate test code
+	uv run playwright codegen \
+		--output tests/test_codegen.py
