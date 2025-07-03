@@ -19,7 +19,6 @@ jobs:
       - name: Run Docker container and generate output file
         run: |
           mkdir -p assets
-          echo "test" > assets/test.txt
           docker run \
             --rm \
             -v $(pwd)/assets:/app/assets \
