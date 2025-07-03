@@ -1,0 +1,34 @@
+name: scrape-visasq
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 3" # Every Wednesday at 00:00 UTC
+
+jobs:
+  scrape-visasq:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Run Docker container and generate output file
+        run: |
+          mkdir -p assets
+          echo "test" > assets/test.txt
+          docker run \
+            --rm \
+            -v $(pwd)/assets:/app/assets \
+            ks6088ts/workshop-playwright-python:latest \
+            python scripts/visasq.py scrape --max-page 20
+
+      - name: Upload output file as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: assets
+          path: ./assets/
+          retention-days: 14

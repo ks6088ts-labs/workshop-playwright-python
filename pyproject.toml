@@ -11,6 +11,7 @@ dependencies = [
     "pytest-playwright>=0.7.0",
     "streamlit>=1.45.0",
     "streamlit-authenticator>=0.4.2",
+    "typer>=0.16.0",
 ]
 
 [project.optional-dependencies]

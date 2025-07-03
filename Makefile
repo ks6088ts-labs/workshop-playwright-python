@@ -57,7 +57,7 @@ update: ## update packages
 # ---
 DOCKER_REPO_NAME ?= ks6088ts
 DOCKER_IMAGE_NAME ?= workshop-playwright-python
-DOCKER_COMMAND ?=
+DOCKER_COMMAND ?= python scripts/visasq.py scrape --help
 
 # Tools
 TOOLS_DIR ?= /usr/local/bin
@@ -87,6 +87,13 @@ docker-scan: ## scan Docker image
 
 .PHONY: ci-test-docker
 ci-test-docker: docker-lint docker-build docker-scan docker-run ## run CI test for Docker
+
+.PHONY: docker-visasq-scrape
+docker-visasq-scrape: ## scrape visasq entries using Docker
+	docker run --rm \
+		-v $(PWD)/assets:/app/assets \
+		$(DOCKER_REPO_NAME)/$(DOCKER_IMAGE_NAME):$(GIT_TAG) \
+		python scripts/visasq.py scrape --max-page 20
 
 # ---
 # Docs
