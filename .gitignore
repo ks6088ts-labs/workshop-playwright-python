@@ -169,3 +169,4 @@ tests/test_codegen.py
 !.streamlit/secrets.toml.example
 playwright/.auth/*
 !playwright/.auth/.gitkeep
+assets/visasq_entries_*.csv
