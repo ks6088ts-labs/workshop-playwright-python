@@ -19,6 +19,8 @@ COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
 COPY . .
 
 # Install dependencies
-RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt && \
+    playwright install --with-deps
+
 
 CMD ["python", "workshop_playwright_python/core.py"]

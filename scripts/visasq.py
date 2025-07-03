@@ -3,7 +3,11 @@ import csv
 import datetime
 import os
 
+import typer
+
 from playwright.async_api import Page, async_playwright
+
+app = typer.Typer(help="VisaSQ スクレイパー CLI ツール")
 
 
 async def dump_csv(entries, filepath="assets/visasq_entries.csv"):
@@ -26,6 +30,7 @@ async def dump_csv(entries, filepath="assets/visasq_entries.csv"):
 
 async def retrieve_visasq_entries(page: Page, url: str):
     entries = []
+    print(f"Retrieving entries from {url}...")
     await page.goto(url)
     await page.wait_for_load_state("networkidle")
 
@@ -55,26 +60,31 @@ async def retrieve_visasq_entries(page: Page, url: str):
     return entries
 
 
-async def main():
+async def run_scraper(
+    base_url: str,
+    max_page: int,
+    keyword: str = "",
+    is_started_only: bool = True,
+    output_dir: str = "assets",
+):
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         page = await browser.new_page()
 
-        BASE_URL = "https://expert.visasq.com"
         all_entries = []
-        max_page = 15
 
         try:
             for page_number in range(1, max_page + 1):
                 print(f"Retrieving entries from page {page_number}...")
-                entries = await retrieve_visasq_entries(
-                    page=page,
-                    url=f"{BASE_URL}/issue/?keyword=&is_started_only=true&page={page_number}",
-                )
+
+                # キーワードとフィルター条件を URL に追加
+                url = f"{base_url}/issue/?keyword={keyword}&is_started_only={'true' if is_started_only else 'false'}&page={page_number}"  # noqa: E501
+
+                entries = await retrieve_visasq_entries(page=page, url=url)
 
                 # entries の url を絶対 URL に変換
                 for entry in entries:
-                    entry["url"] = f"{BASE_URL}{entry['url']}"
+                    entry["url"] = f"{base_url}{entry['url']}"
 
                 all_entries.extend(entries)
                 print(f"Found {len(entries)} entries on page {page_number}")
@@ -88,16 +98,40 @@ async def main():
 
         # 現在の日時をファイル名に含める
         now = datetime.datetime.now()
-        filepath = "assets/visasq_entries_" + now.strftime("%Y%m%d_%H%M%S") + ".csv"
+        filepath = f"{output_dir}/visasq_entries_" + now.strftime("%Y%m%d_%H%M%S") + ".csv"
 
-        await dump_csv(
-            entries=all_entries,
-            filepath=filepath,
-        )
+        await dump_csv(entries=all_entries, filepath=filepath)
 
         print(f"Scraping completed. Total entries: {len(all_entries)}")
         print(f"Results saved to: {filepath}")
 
+        return all_entries
+
+
+@app.command()
+def scrape(
+    max_page: int = typer.Option(15, "--max-page", "-m", help="スクレイピングする最大ページ数"),
+    keyword: str = typer.Option("", "--keyword", "-k", help="検索キーワード"),
+    is_started_only: bool = typer.Option(
+        True, "--started-only/--not-started-only", help="進行中の案件のみを表示するかどうか"
+    ),
+    base_url: str = typer.Option("https://expert.visasq.com", "--base-url", "-u", help="VisaSQ の基本 URL"),
+    output_dir: str = typer.Option("assets", "--output-dir", "-o", help="出力ディレクトリ"),
+):
+    """
+    VisaSQ からデータをスクレイピングし、CSV ファイルに保存します
+    """
+    typer.echo(f"スクレイピングを開始します。最大ページ数: {max_page}")
+    asyncio.run(run_scraper(base_url, max_page, keyword, is_started_only, output_dir))
+
+
+@app.callback()
+def callback():
+    """
+    VisaSQ ウェブサイトから案件情報をスクレイピングするツール
+    """
+    pass
+
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    app()
