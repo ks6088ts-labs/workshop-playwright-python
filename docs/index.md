@@ -60,6 +60,10 @@ uv run scripts/save_context.py
 uv run scripts/load_context.py
 ```
 
+### Development
+
+- [Web Scraping Google Maps Using Playwright Python And OpenAI API](https://www.youtube.com/watch?v=6WxaEbkOPKM)
+
 ## [Microsoft Playwright Testing](https://learn.microsoft.com/ja-jp/azure/playwright-testing/)
 
 - [Get Started Sample](https://github.com/microsoft/playwright-testing-service/tree/main/samples/get-started)
