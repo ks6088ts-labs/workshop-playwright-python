@@ -1,0 +1,19 @@
+{
+  "servers": {
+    // https://github.com/microsoft/playwright-mcp
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+        // "--vision"
+      ]
+    },
+    // https://github.com/executeautomation/mcp-playwright
+    "executeautomation": {
+      "command": "npx",
+      "args": [
+        "@executeautomation/playwright-mcp-server"
+      ],
+    },
+  }
+}

@@ -30,6 +30,8 @@ make show-trace
 make codegen
 ```
 
+[Playwright Trace Viewer](https://trace.playwright.dev/) provides a way to visualize the execution of Playwright tests, which can be helpful for debugging and understanding test flows.
+
 ## Guides
 
 ### Authentication
@@ -69,6 +71,21 @@ uv run scripts/load_context.py
 - [Get Started Sample](https://github.com/microsoft/playwright-testing-service/tree/main/samples/get-started)
 
 ## [Playwright MCP server](https://github.com/microsoft/playwright-mcp)
+
+### Repos
+
+- [Microsoft / Playwright MCP server](https://github.com/microsoft/playwright-mcp)
+  - [[Feature] Adding codegen feature. #519](https://github.com/microsoft/playwright-mcp/issues/519): コード生成機能に関する機能追加の要望
+- [executeautomation/mcp-playwright](https://github.com/executeautomation/mcp-playwright)
+  - [Code Generation Tools](https://executeautomation.github.io/mcp-playwright/docs/playwright-web/Supported-Tools#start_codegen_session)
+
+### Scenarios
+
+**Code generation**
+
+- [How to Generate Playwright Tests using MCP + Copilot](https://www.youtube.com/watch?v=AaCj939XIQ4)
+  - Blog: [Letting Playwright MCP Explore your site and Write your Tests](https://dev.to/debs_obrien/letting-playwright-mcp-explore-your-site-and-write-your-tests-mf1)
+  - Prompt: [Playwright E2E test generator](https://github.com/ks6088ts/prompts/blob/main/.github/prompts/write_e2e_test.prompt.md)
 
 ## [Locust](https://github.com/locustio/locust)
 
