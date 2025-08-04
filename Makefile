@@ -118,6 +118,7 @@ ci-test-docs: docs ## run CI test for documentation
 test-verbose: ## run tests with verbose
 	uv run pytest \
 		--capture=no \
+		--cov-report html \
 		--verbose \
 		--headed \
 		--tracing on \
