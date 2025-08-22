@@ -4,8 +4,8 @@
     "playwright": {
       "command": "npx",
       "args": [
-        "@playwright/mcp@latest"
-        // "--vision"
+        "@playwright/mcp@latest",
+        "--caps=vision"
       ]
     },
     // https://github.com/executeautomation/mcp-playwright
