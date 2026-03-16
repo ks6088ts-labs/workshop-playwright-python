@@ -4,7 +4,6 @@ import datetime
 import os
 
 import typer
-
 from playwright.async_api import Page, async_playwright
 
 app = typer.Typer(help="VisaSQ スクレイパー CLI ツール")
