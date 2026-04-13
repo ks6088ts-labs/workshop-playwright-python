@@ -5,7 +5,7 @@ description = "A GitHub template repository for Python"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "authlib>=1.5.2",
+    "authlib>=1.6.10",
     "locust>=2.36.2",
     "playwright>=1.52.0",
     "pytest-playwright>=0.7.0",
